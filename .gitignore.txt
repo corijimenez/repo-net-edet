@@ -1,0 +1,25 @@
+# Archivos de NetBeans
+/nbproject/private/
+/build/
+/target/
+*.swp
+*.swo
+
+# Archivos de compilación
+*.class
+*.jar
+*.war
+
+# Dependencias de Maven
+.mvn/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
