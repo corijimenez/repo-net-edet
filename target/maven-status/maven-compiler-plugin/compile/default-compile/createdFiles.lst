@@ -1,3 +1,9 @@
 com\mycompany\proyecto\edet\presentation\controller\dto\UserDTO.class
+com\mycompany\proyecto\edet\infraestructure_transversal\utils\GeneradorCodigo.class
+com\mycompany\proyecto\edet\presentation\controller\CuentaController.class
+com\mycompany\proyecto\edet\domain\entities\Cuenta.class
+com\mycompany\proyecto\edet\domain\entities\EstadoCuenta.class
+com\mycompany\proyecto\edet\infraestructure_transversal\emails\EmailService.class
 com\mycompany\proyecto\edet\ProyectoEdet.class
-UserController.class
+com\mycompany\proyecto\edet\domain\repositories\CuentaRepositorio.class
+com\mycompany\proyecto\edet\aplication\services\CuentaService.class

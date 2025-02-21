@@ -1,6 +1,6 @@
 package com.mycompany.proyecto.edet.domain.entities;
 
-public enum StatusUser {
+public enum EstadoCuenta {
     ACTIVO,
     INACTIVO
 }
