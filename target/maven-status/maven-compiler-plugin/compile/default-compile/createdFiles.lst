@@ -1,5 +1,4 @@
 com\mycompany\proyecto\edet\infraestructure_transversal\utils\GeneradorCodigo.class
-com\mycompany\proyecto\edet\presentation\vistas\CuentaForm$3.class
 com\mycompany\proyecto\edet\domain\entities\EstadoCuenta.class
 com\mycompany\proyecto\edet\presentation\vistas\CuentaForm$1.class
 com\mycompany\proyecto\edet\aplication\services\GestorRNC.class

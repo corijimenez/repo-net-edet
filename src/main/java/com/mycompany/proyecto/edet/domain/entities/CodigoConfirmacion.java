@@ -13,6 +13,7 @@ private int intentosRestantes = 3;
         this.horaCreacion = horaCreacion;
         this.horaCaducidad = horaCaducidad;
     }
+    
 
     public CodigoConfirmacion(String codigo) {
     this.codigo = codigo;
@@ -48,6 +49,11 @@ private int intentosRestantes = 3;
 
     public void setIntentosRestantes(int intentosRestantes) {
         this.intentosRestantes = intentosRestantes;
+    }
+
+    @Override
+    public String toString() {
+        return "CodigoConfirmacion{" + "codigo=" + codigo + '}';
     }
 
 

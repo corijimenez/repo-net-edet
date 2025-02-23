@@ -19,6 +19,7 @@ public class GeneradorCodigo {
     // Método para generar un código de 6 dígitos
     public String generarCodigo() {
         int codigo = 100000 + random.nextInt(900000);  // Genera un número entre 100000 y 999999
+        
         return String.valueOf(codigo);
     }
 }

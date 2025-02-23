@@ -3,38 +3,45 @@ package com.mycompany.proyecto.edet.presentation.vistas;
 
 import com.mycompany.proyecto.edet.aplication.services.GestorRNC;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class CuentaForm extends javax.swing.JFrame {
-    GestorRNC gestor;
-    public CuentaForm() {
+    private GestorRNC gestor;
+    
+    @Autowired 
+    public CuentaForm(GestorRNC gestor) {
+        this.gestor = gestor;
         initComponents();
     }
     private void registrarCuenta() {
-        String email = jTextField1.getText();
+        String email = jTextField1.getText().trim();
         String contraseña = new String(jTextField2.getText());
         String contraseñaConfirmada = new String(jTextField3.getText());
         boolean seAceptoTerminos = jCheckBox1.isSelected();
-        
+
         if (email.isEmpty() || contraseña.isEmpty() || contraseñaConfirmada.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         if (!contraseña.equals(contraseñaConfirmada)) {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         if (!seAceptoTerminos) {
             JOptionPane.showMessageDialog(this, "Debe aceptar los términos y condiciones.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        // Aquí llamamos al servicio de aplicación para registrar la cuenta
-        // CuentaService cuentaService = new CuentaService();
-        // boolean success = cuentaService.registrarCuenta(email, password);
-        
-        JOptionPane.showMessageDialog(this, "Registro exitoso. Revise su email para activar la cuenta.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        try {
+            gestor.ingresarDatos(email, contraseña, contraseñaConfirmada, seAceptoTerminos);
+            JOptionPane.showMessageDialog(this, "Registro exitoso. Revisa tu correo para confirmar tu cuenta.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -143,14 +150,13 @@ public class CuentaForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here
-        boolean acepta = jCheckBox1.getAutoscrolls();
+
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        GestorRNC gestor = new GestorRNC();
-        boolean success = gestor.ingresarDatos(email, contraseña, confirmacionContraseña, rootPaneCheckingEnabled);
+        // se ejecutara lo siguiente al presionar el boton 
+        registrarCuenta();
+   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -179,12 +185,12 @@ public class CuentaForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CuentaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CuentaForm().setVisible(true);
-            }
+        
+         GestorRNC gestor = new GestorRNC();
+    
+       
+        java.awt.EventQueue.invokeLater(() -> {
+            new CuentaForm(gestor).setVisible(true);
         });
     }
 

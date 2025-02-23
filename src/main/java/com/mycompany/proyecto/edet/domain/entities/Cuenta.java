@@ -1,14 +1,11 @@
 package com.mycompany.proyecto.edet.domain.entities;
 
 import com.mycompany.proyecto.edet.infraestructure_transversal.utils.GeneradorCodigo;
-import com.mycompany.proyecto.edet.domain.entities.CodigoConfirmacion;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import java.lang.String ;
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "cuentas")
@@ -17,10 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cuenta {
-private GeneradorCodigo generador;
-private CodigoConfirmacion codigo;
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,28 +34,23 @@ private CodigoConfirmacion codigo;
     @Column(nullable = false)
     private boolean seAceptoTerminos;
 
-    
-    public Cuenta(String email, String contraseña, EstadoCuenta estado, CodigoConfirmacion codigoConfirmacion, boolean seAceptoTerminos) {
+    public Cuenta(String email, String contraseña, boolean seAceptoTerminos) {
         this.email = email;
         this.contraseña = contraseña;
-        this.estado = estado.INACTIVO;
+        this.estado = EstadoCuenta.INACTIVO;
         this.seAceptoTerminos = seAceptoTerminos;
+        generarCodigoConfirmacion(); // Genera automáticamente el código de confirmación
     }
 
-    public Cuenta(String email, String contraseña) {
-        this.email = email;
-        this.contraseña = contraseña;
-    }
-    public CodigoConfirmacion getCodigoConfirmacion() {
-        return codigoConfirmacion;
+    // Genera el código de confirmación
+    public void generarCodigoConfirmacion() {
+        String codigo = GeneradorCodigo.getInstancia().generarCodigo();
+        this.codigoConfirmacion = new CodigoConfirmacion(codigo); // Crea el objeto CodigoConfirmacion
     }
 
-    public void setCodigoConfirmacion(CodigoConfirmacion codigoConfirmacion) {
-        this.codigoConfirmacion = codigoConfirmacion;
-    }
-    
-    public void activarCuenta() {
-        this.estado = estado.ACTIVO;
+    // Obtener el código de confirmación como String (usado en GestorRNC)
+    public String getCodigoConfirmacion() {
+        return this.codigoConfirmacion.getCodigo(); // Obtener solo el código como String
     }
 }
 
