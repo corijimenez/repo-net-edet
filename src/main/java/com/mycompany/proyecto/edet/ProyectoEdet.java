@@ -4,13 +4,17 @@
 
 package com.mycompany.proyecto.edet;
 
-/**
- *
- * @author Home
- */
-public class ProyectoEdet {
 
+import javax.swing.JFrame;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ProyectoEdet {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        SpringApplication.run(ProyectoEdet.class, args);
+        JFrame ventana = new JFrame();
+        ventana.setVisible(true);
+
     }
 }
